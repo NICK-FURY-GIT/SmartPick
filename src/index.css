@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: #0A0A0F; color: #fff; min-height: 100vh; }
+
+  /* Glassmorphism utility */
+  .glass {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .glass-strong {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+
+  /* Neon glow keyframes */
+  @keyframes neon-pulse-cyan {
+    0%, 100% { box-shadow: 0 0 5px #00E5FF, 0 0 10px #00E5FF40; }
+    50% { box-shadow: 0 0 20px #00E5FF, 0 0 40px #00E5FF80, 0 0 60px #00E5FF40; }
+  }
+  @keyframes neon-pulse-amber {
+    0%, 100% { box-shadow: 0 0 5px #FFD600, 0 0 10px #FFD60040; }
+    50% { box-shadow: 0 0 20px #FFD600, 0 0 40px #FFD60080, 0 0 60px #FFD60040; }
+  }
+}
