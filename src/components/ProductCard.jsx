@@ -16,7 +16,6 @@ export default function ProductCard({ product, division }) {
   const isDisabled = step === 'signaling' || step === 'blinking'
   const accentBorder = division === 'sanitary' ? 'hover:border-accent-cyan/40' : 'hover:border-accent-amber/40'
   const accentText = division === 'sanitary' ? 'text-accent-cyan' : 'text-accent-amber'
-  const accentBg = division === 'sanitary' ? 'bg-accent-cyan/10 hover:bg-accent-cyan/20' : 'bg-accent-amber/10 hover:bg-accent-amber/20'
   const accentBtn = division === 'sanitary' ? 'bg-accent-cyan/20 text-accent-cyan border-accent-cyan/30 hover:bg-accent-cyan/30' : 'bg-accent-amber/20 text-accent-amber border-accent-amber/30 hover:bg-accent-amber/30'
 
   const handlePick = () => {

@@ -12,9 +12,6 @@ export default function FloorSection({ division, products }) {
   const isSignaling = useSimulationStore(s => s.isSignaling)
   const activeProduct = useSimulationStore(s => s.activeProduct)
 
-  const accentColor = division === 'sanitary' ? 'accent-cyan' : 'accent-amber'
-  const accentHex = division === 'sanitary' ? '#00E5FF' : '#FFD600'
-
   // Build shelves for the godown area
   const shelfIds = [...new Set(products.map(p => `${p.shelfLocation.zone}-${p.shelfLocation.rack}`))]
 
@@ -40,7 +37,7 @@ export default function FloorSection({ division, products }) {
       </div>
 
       {/* Godown Area */}
-      <div className={`flex-1 glass rounded-xl p-4 lg:p-6 relative ${isBlinking || isSignaling ? 'ring-1 ring-' + accentColor + '/30' : ''}`}>
+      <div className={`flex-1 glass rounded-xl p-4 lg:p-6 relative ${isBlinking || isSignaling ? (division === 'sanitary' ? 'ring-1 ring-accent-cyan/30' : 'ring-1 ring-accent-amber/30') : ''}`}>
         <h3 className="text-xs font-semibold uppercase tracking-widest text-white/30 mb-4">
           Warehouse — Godown ({division === 'sanitary' ? 'Top Floor' : 'Ground Floor'})
         </h3>

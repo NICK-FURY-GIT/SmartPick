@@ -1,7 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { PRODUCTS_BY_DIVISION } from '../data/products'
 import FloorSection from './FloorSection'
-import { Package } from 'lucide-react'
 
 export default function FloorMap({ division }) {
   const products = PRODUCTS_BY_DIVISION[division] || []
