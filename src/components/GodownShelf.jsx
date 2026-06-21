@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Package, PackageCheck } from 'lucide-react'
+import { Package } from 'lucide-react'
 import { formatINR } from '../utils/formatters'
 
 export default function GodownShelf({ shelfId, products, isBlinking, division }) {

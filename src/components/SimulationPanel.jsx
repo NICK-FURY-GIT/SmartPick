@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Radio, Cpu, CheckCircle } from 'lucide-react'
+import { Radio, CheckCircle } from 'lucide-react'
 import useSimulationStore from '../stores/simulationStore'
 import useCartStore from '../stores/cartStore'
 import useGuidanceStore from '../stores/guidanceStore'
