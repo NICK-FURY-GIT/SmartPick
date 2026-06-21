@@ -1,7 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { ShoppingCart, Trash2, FileText, X } from 'lucide-react'
 import useCartStore from '../stores/cartStore'
-import useSimulationStore from '../stores/simulationStore'
 import { formatINR, calculateLineTotal } from '../utils/formatters'
 import { generateInvoiceData } from '../utils/invoiceGenerator'
 
@@ -12,7 +11,7 @@ export default function SmartCart() {
   const removeItem = useCartStore(s => s.removeItem)
   const generateBill = useCartStore(s => s.generateBill)
   const setInvoiceType = useCartStore(s => s.setInvoiceType)
-  const step = useSimulationStore(s => s.step)
+  const dismissBill = useCartStore(s => s.dismissBill)
 
   const subtotal = items.reduce((sum, item) => sum + calculateLineTotal(item.product.price, item.quantity), 0)
   const totalGst = items.reduce((sum, item) => {
@@ -147,7 +146,7 @@ export default function SmartCart() {
         {showBill && (
           <InvoiceModal
             invoice={generateInvoiceData(items, invoiceType)}
-            onDismiss={useCartStore.getState().dismissBill}
+            onDismiss={dismissBill}
           />
         )}
       </AnimatePresence>
