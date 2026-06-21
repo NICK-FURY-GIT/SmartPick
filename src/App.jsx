@@ -1,12 +1,33 @@
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import GuidanceSystem from './components/GuidanceSystem'
 import TabSelector from './components/TabSelector'
 import FloorMap from './components/FloorMap'
 import SmartCart from './components/SmartCart'
 import PersistenceToggle from './components/PersistenceToggle'
+import useSimulationStore from './stores/simulationStore'
+import useCartStore from './stores/cartStore'
+import useGuidanceStore from './stores/guidanceStore'
 
 export default function App() {
   const [activeDivision, setActiveDivision] = useState('sanitary')
+
+  // Tab switch mid-simulation: auto-complete any in-progress pick
+  const handleTabSwitch = useCallback((tabId) => {
+    if (tabId === activeDivision) return
+    const sim = useSimulationStore.getState()
+    if (sim.step === 'signaling' || sim.step === 'blinking') {
+      const item = sim.confirmPick()
+      if (item) {
+        useCartStore.getState().addItem(item.product, item.quantity)
+        useGuidanceStore.getState().updateGuidance(
+          `${item.product.name} (x${item.quantity}) auto-completed. Switched to ${tabId === 'sanitary' ? 'Sanitary' : 'Hardware'} Division.`,
+          'System Status: Pick Auto-Completed | Tab switched'
+        )
+      }
+      sim.reset()
+    }
+    setActiveDivision(tabId)
+  }, [activeDivision])
 
   return (
     <div className="h-screen w-screen overflow-hidden flex flex-col bg-[#0A0A0F]">
@@ -25,7 +46,7 @@ export default function App() {
       <GuidanceSystem />
 
       {/* Tab Selector */}
-      <TabSelector activeDivision={activeDivision} onSwitch={setActiveDivision} />
+      <TabSelector activeDivision={activeDivision} onSwitch={handleTabSwitch} />
 
       {/* Main Content */}
       <main className="flex-1 flex overflow-hidden">

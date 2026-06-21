@@ -5,13 +5,13 @@ import useCartStore from '../stores/cartStore'
 import useGuidanceStore from '../stores/guidanceStore'
 
 export default function SimulationPanel({ product, division }) {
+  const activeQuantity = useSimulationStore(s => s.activeQuantity)
   const confirmPick = useSimulationStore(s => s.confirmPick)
   const reset = useSimulationStore(s => s.reset)
   const addItem = useCartStore(s => s.addItem)
   const updateGuidance = useGuidanceStore(s => s.updateGuidance)
 
   const accentColor = division === 'sanitary' ? 'accent-cyan' : 'accent-amber'
-  const accentHex = division === 'sanitary' ? '#00E5FF' : '#FFD600'
 
   const handleConfirm = () => {
     const result = confirmPick()
@@ -54,7 +54,7 @@ export default function SimulationPanel({ product, division }) {
         </div>
         <div className="flex items-center justify-between">
           <span className="text-xs text-white/40">Quantity</span>
-          <span className="text-xs font-bold text-white/90">x{useSimulationStore.getState().activeQuantity}</span>
+          <span className="text-xs font-bold text-white/90">x{activeQuantity}</span>
         </div>
         <div className="flex items-center justify-between">
           <span className="text-xs text-white/40">Status</span>

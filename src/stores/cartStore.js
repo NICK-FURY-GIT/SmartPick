@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
+import useGuidanceStore from './guidanceStore'
 
 const cartStore = (set, get) => ({
   items: [],
@@ -50,8 +51,15 @@ const cartStore = (set, get) => ({
 const useCartStore = create(
   persist(cartStore, {
     name: 'smartpick-cart',
-    // Persist only when the guidanceStore flag is true
-    partialize: (state) => state,
+    // Persist only when guidanceStore persistenceEnabled is true
+    partialize: (state) => {
+      try {
+        const persisted = useGuidanceStore.getState().persistenceEnabled
+        return persisted ? state : {}
+      } catch {
+        return state // fallback: persist normally if store not ready
+      }
+    },
     skipHydration: false,
   })
 )

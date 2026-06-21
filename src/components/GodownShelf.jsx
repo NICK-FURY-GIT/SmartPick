@@ -18,7 +18,7 @@ export default function GodownShelf({ shelfId, products, isBlinking, division })
       transition={isBlinking ? { duration: 1.2, repeat: Infinity, ease: 'easeInOut' } : { duration: 0.3 }}
       className={`glass rounded-xl p-3 border transition-colors ${
         isBlinking
-          ? `border-${division === 'sanitary' ? 'accent-cyan/50' : 'accent-amber/50'}`
+          ? division === 'sanitary' ? 'border-accent-cyan/50' : 'border-accent-amber/50'
           : 'border-white/5 hover:border-white/10'
       }`}
     >

@@ -35,7 +35,7 @@ export function generateInvoiceData(items, type = 'gst') {
     quantity: item.quantity,
     gstRate: item.product.gstRate,
   }))
-  const taxSummary = calculateTaxBreakdown(subtotal, taxItems)
+  const taxSummary = calculateTaxBreakdown(taxItems)
 
   const invoiceNumber = `SGA-2026-${String(invoiceCounter++).padStart(4, '0')}`
 

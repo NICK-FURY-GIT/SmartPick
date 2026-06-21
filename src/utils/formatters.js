@@ -29,7 +29,7 @@ export function calculateLineTotal(price, quantity) {
  * Calculate tax breakdown for an invoice
  * Returns CGST and SGST amounts (each = half of total GST)
  */
-export function calculateTaxBreakdown(subtotal, items) {
+export function calculateTaxBreakdown(items) {
   // Calculate total GST amount
   let totalGst = 0
   for (const item of items) {
